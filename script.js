@@ -4,6 +4,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 
+// Show error outline
 function showError(input, message) {
   const formControl = input.parentElement;
   formControl.className = "form-control error";
@@ -11,11 +12,19 @@ function showError(input, message) {
   small.innerText = message;
 }
 
+// Show success outline
 function showSuccess(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
 }
 
+// Check email is valid
+function isValidEmail(email) {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+//Event listeners
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -27,6 +36,8 @@ form.addEventListener("submit", function (e) {
 
   if (email.value === "") {
     showError(email, "Email is required");
+  } else if (!isValidEmail(email.value)) {
+    showError(email, "Email is not valid");
   } else {
     showSuccess(email);
   }
